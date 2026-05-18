@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{{ user.name }} - User Detail{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h2 class="mb-0">{{ user.name }}</h2>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Email</label>
+                        <p class="form-control-plaintext">{{ user.email }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Phone</label>
+                        <p class="form-control-plaintext">{{ user.phone|default:"Not provided" }}</p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label class="form-label fw-bold">Address</label>
+                        <p class="form-control-plaintext">{{ user.address|default:"Not provided"|linebreaks }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-3 text-muted small">
+                    <div class="col-md-6">
+                        <strong>Created:</strong> {{ user.created_at|date:"M d, Y at H:i" }}
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Last Updated:</strong> {{ user.updated_at|date:"M d, Y at H:i" }}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="{% url 'user_list' %}" class="btn btn-secondary">⬅️ Back to List</a>
+                <div>
+                    <a href="{% url 'user_update' user.pk %}" class="btn btn-warning">✏️ Edit</a>
+                    <a href="{% url 'user_delete' user.pk %}" class="btn btn-danger">🗑️ Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
